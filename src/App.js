@@ -2,30 +2,31 @@ import React, {useState} from 'react';
 import './App.css';
 
 function App() {
-  const [items, setItems] = useState([
+  const [tasks, setTasks] = useState([
     { name: "Buy Shopping"},
     { name: "Clean Bathroom"},
     { name: "Car's MOT"},
   ]);
 
-  const [newItem, setNewItem] = useState("");
+  const [newTask, setNewTask] = useState("");
 
-  const itemNodes = items.map((item, index) => {
+  const taskNodes = tasks.map((task, index) => {
     return(
-        <li key={index}><span>{item.name}</span></li>
+        <li key={index}><span>{task.name}</span></li>
     )
 });
 
-  const handleItemInput = (event) => {
-    setNewItem(event.target.value);
+  const handleTaskInput = (event) => {
+    console.log(event.target)
+    setNewTask(event.target.value);
   };
 
-  const saveNewItem = (event) => {
-    event.preventDefualt();
-    const copyItems = [...items]
-    copyItems.push({name: newItem})
-    setItems(copyItems)
-    setNewItem("")
+  const saveNewTask = (event) => {
+    event.preventDefault();
+    const copyTasks = [...tasks]
+    copyTasks.push({name: newTask})
+    setTasks(copyTasks)
+    setNewTask("")
   };
 
 
@@ -35,13 +36,13 @@ function App() {
       <hr></hr>
 
       <ul>
-        {itemNodes}
+        {taskNodes}
       </ul>
 
-      <form onSubmit={saveNewItem}>
-        <label htmlFor="new-item">Add a new item:</label>  
-        <input id="new-item" type="text" value={newItem} onChange={handleItemInput}/>           
-        <input type="submit" value="Save New Item" />
+      <form onSubmit={saveNewTask}>
+        <label htmlFor="new-task">Add a new task:</label>  
+        <input id="new-task" type="text" value={newTask} onChange={handleTaskInput}/>           
+        <input type="submit" value="Save New Task" />
       </form>
 
     </div>
